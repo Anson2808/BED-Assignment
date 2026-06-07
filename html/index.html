@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HawkerSG | Reviews</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <h1>HawkerSG</h1>
+      <nav>
+        <a href="#">Dashboard</a>
+        <a href="#">Stalls</a>
+        <a href="#">Inspection</a>
+        <a href="#">Feedback</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <h2>Rate and review on Google</h2>
+
+      <div class="star-rating" id="starRating">
+        <span data-value="1">★</span>
+        <span data-value="2">★</span>
+        <span data-value="3">★</span>
+        <span data-value="4">★</span>
+        <span data-value="5">★</span>
+      </div>
+
+      <div class="sort-section">
+        <label>Sort by:</label>
+        <button onclick="sortReviews('newest')">Newest</button>
+        <button onclick="sortReviews('highest')">Highest</button>
+        <button onclick="sortReviews('lowest')">Lowest</button>
+      </div>
+
+      <section id="reviewList"></section>
+    </main>
+
+    <script src="../js/rating.js"></script>
+    <script src="../js/reviews.js"></script>
+  </body>
+</html>

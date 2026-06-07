@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Write a Review</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<main class="container">
+    <h2>Write Your Review</h2>
+
+    <form id="reviewForm">
+        <label>Rating:</label>
+        <div class="stars" id="selectedRating">★★★★★</div>
+
+        <label for="reviewerName">Your Name</label>
+        <input type="text" id="reviewerName" required placeholder="Enter your name">
+
+        <label for="reviewText">Your Review</label>
+        <textarea id="reviewText" required></textarea>
+
+        <label for="imageUpload">Upload Image (Optional)</label>
+        <input type="file" id="imageUpload" accept="image/*">
+
+        <button type="submit">Submit Review</button>
+    </form>
+</main>
+
+<script>
+// This script handles the review form page
+
+// When the page loads, it shows the selected rating from the main page
+window.addEventListener('DOMContentLoaded', function() {
+    // Get the saved rating from browser storage
+    var savedRating = localStorage.getItem('rating');
+    
+    // If no rating was saved, 5 stars is the default
+    if (!savedRating) {
+        savedRating = 5;
+    }
+    
+    // Convert the rating text from a string to a number and display the correct stars
+    var ratingNumber = parseInt(savedRating);
+    showSelectedStars(ratingNumber);
+});
+
+// Function to display the filled and empty stars
+function showSelectedStars(numberOfStars) {
+    // Get the star display area
+    var starsArea = document.getElementById('selectedRating');
+    // Creates an empty string to store the star symbols.
+    var starsHTML = '';
+    
+    // Create 5 stars, filled or empty based on rating
+    for (var i = 1; i <= 5; i++) {
+        if (i <= numberOfStars) {
+            starsHTML = starsHTML + '★';
+        } else {
+            starsHTML = starsHTML + '☆';
+        }
+    }
+    
+    // Put the stars in the display area which is the page
+    starsArea.innerHTML = starsHTML;
+}
+
+// It listens for the form submission and when the form is submitted, save the review
+document.getElementById("reviewForm").addEventListener("submit", function (event) {
+    // It prevents the default page refresh behavior
+    event.preventDefault();
+    
+    // Get all the saved rating
+    var userRating = localStorage.getItem('rating');
+    // If no rating was saved, 5 stars is the default
+    if (!userRating) {
+        userRating = 5;
+    }
+    // Convert the rating text from a string to a number
+    var ratingNumber = parseInt(userRating);
+    
+    // Get the user's name, review text, and image file
+    var userName = document.getElementById('reviewerName').value;
+    var userReview = document.getElementById('reviewText').value;
+    var imageFile = document.getElementById('imageUpload');
+    
+    // Check if the user uploaded an image
+    if (imageFile.files && imageFile.files[0]) {
+        // Read the image file
+        var fileReader = new FileReader();
+        // Runs when the image is fully read
+        fileReader.onload = function(event) {
+            var imageData = event.target.result;
+            // Save the review with the image data
+            saveUserReview(userName, ratingNumber, userReview, imageData);
+        };
+        // Reads the image file
+        fileReader.readAsDataURL(imageFile.files[0]);
+    // It saves the review without image if no image is uploaded
+    } else {
+        saveUserReview(userName, ratingNumber, userReview, null);
+    }
+});
+
+// Function to save the review to browser storage
+function saveUserReview(name, rating, reviewText, imageData) {
+    // Get existing reviews from browser storage
+    var existingReviews = localStorage.getItem("reviews");
+    // This creates an empty array to store reviews
+    var reviewList = [];
+    
+    // Converts the existing reviews from string to array if there are any
+    if (existingReviews) {
+        reviewList = JSON.parse(existingReviews);
+    }
+    
+    // Create the new review object
+    var newReview = {
+        name: name,
+        rating: rating,
+        text: reviewText,
+        image: imageData,
+        date: new Date().toLocaleDateString()
+    };
+    
+    // Add the new review to the list
+    reviewList.push(newReview);
+    
+    // Save the updated list back to the browser storage
+    localStorage.setItem("reviews", JSON.stringify(reviewList));
+    
+    // Show the success message
+    alert("Review submitted successfully!");
+    
+    // Remove the rating since we already used it
+    localStorage.removeItem('rating');
+    
+    // Brings us back to the main page
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

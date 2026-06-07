@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HawkerSG</title>
+    <link rel="stylesheet" href="../css/cart.css">
+    <script src="../js/cart.js" defer></script>
+
+
+</head>
+
+
+<!-- NavBar -->
+<body>
+    <nav class="navbar">
+  <div class="logo">HawkerSG</div>
+  <ul>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="stalls.html">Stalls</a></li>
+    <li><a href="index.html">Cart</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- divider line -->
+<div class="divider"></div>
+
+<div class="cart-title">YOUR CART</div>
+
+<div class="divider"></div>
+
+<div class="cart-container">
+    <h2>Your Shopping Cart</h2>
+
+    <div style="padding-bottom: 10px;">
+        <input type="checkbox" id="select-all"> <label for="select-all">Select All</label>
+    </div>
+
+    <div id="cart-items-list">
+        </div>
+
+    <div class="checkout-bar">
+        <div class="total-price">Total: $<span id="total-display">0.00</span></div>
+        <button class="checkout-btn" id="checkout-btn" disabled>Checkout (0 items)</button>
+    </div>
+</div>
+</body>
+
+
+
+
+</html>

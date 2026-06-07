@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HawkerSG | Stalls</title>
+    <link rel="stylesheet" href="../css/stalls.css">
+</head>
+<body>
+
+<div class="weather-widget" id="weatherWidget">
+    <div class="weather-loading">Loading weather...</div>
+</div>
+<link rel="stylesheet" href="../css/singapore-weather.css">
+<script src="../js/singapore-weather.js"></script>
+
+<nav class="navbar">
+    <div class="logo">HawkerSG</div>
+    <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="stalls.html" class="active">Stalls</a></li>
+        <li><a href="cart.html">Shopping Cart</a></li>
+        <li><a href="inspection.html">Inspection</a></li>
+        <li><a href="review.html">Feedback</a></li>
+    </ul>
+    <div>
+        <input type="text" class="search-box" placeholder="Search stalls...">
+    </div>
+</nav>
+
+<div class="divider"></div>
+
+<section class="stores">
+    <div class="stores-content">
+        <h1>YouFu Fried Hokkien Mee</h1>
+        <button id="scroll-to-menu">View Menu</button>
+    </div>
+    <div class="stores-image-placeholder">
+            <img src="https://sethlui.com/wp-content/uploads/2020/09/Youfu-Fried-Hokkien-Prawn-Noodle-6.jpg">
+    </div>
+</section>
+
+<main class="discovery-section">
+    <div class="featured-post">
+        <div class="post-badge">Top Rated Food #1</div>
+        <h3>Signature Hokkien Mee, $5.50</h3>
+        <div class="btn-group">
+            <button class="btn-know">Know More</button>
+            <button class="btn-cart" data-item="Signature Hokkien Mee" data-price="5.50">Add To Cart</button>
+        </div>
+        <img src="https://admin.misstamchiak.com/wp-content/uploads/2016/12/16069838051_c75eb4dd99_o-e1481721167937.jpg">
+    </div>
+
+    <div class="featured-post">
+        <div class="post-badge">Top Rated Food #2</div>
+        <h3>Prawn Noodle, $4.50</h3>
+        <div class="btn-group">
+            <button class="btn-know">Know More</button>
+            <button class="btn-cart" data-item="Prawn Noodle" data-price="4.50">Add To Cart</button>
+        </div>
+        <img src="https://eatbook.sg/wp-content/uploads/2017/01/Jalan-Sultan-Prawn-Mee-1.jpg">
+    </div>
+</main>
+
+<div id="full-menu" class="menu-container">
+    <h2 class="menu-title">Full Stall Menu</h2>
+    
+    <table class="menu-table">
+        <thead>
+            <tr>
+                <th>Dish Name</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Black Carrot Cake (Small)</td>
+                <td>$4.00</td>
+                <td><button class="btn-cart" data-item="Small Carrot Cake" data-price="4.00">Add</button></td>
+            </tr>
+            <tr>
+                <td>Black Carrot Cake (Large)</td>
+                <td>$6.00</td>
+                <td><button class="btn-cart" data-item="Large Carrot Cake" data-price="6.00">Add</button></td>
+            </tr>
+            <tr>
+                <td>Signature Prawn Mee</td>
+                <td>$5.50</td>
+                <td><button class="btn-cart" data-item="Prawn Mee" data-price="5.50">Add</button></td>
+            </tr>
+            <tr>
+                <td>Oyster Omelette</td>
+                <td>$8.00</td>
+                <td><button class="btn-cart" data-item="Oyster Omelette" data-price="8.00">Add</button></td>
+            </tr>
+            <tr>
+                <td>Fried Kway Teow</td>
+                <td>$4.50</td>
+                <td><button class="btn-cart" data-item="Fried Kway Teow" data-price="4.50">Add</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="social-icons">
+            <p>Follow us on social media!!</p>
+            <p>©®™ 2026 HawkerSG. All rights might be reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="../js/stalls.js"></script>
+</body>
+</html>

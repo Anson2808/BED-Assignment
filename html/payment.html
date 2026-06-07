@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HawkerSG | Payment</title>
+    <link rel="stylesheet" href="../css/payment.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">HawkerSG</div>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="stalls.html">Stalls</a></li>
+            <li><a href="cart.html">Shopping Cart</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="divider"></div>
+
+    <main class="container">
+        <p id="message"></p>
+        <h1>Checkout</h1>
+
+        <div class="order-summary">
+            <div class="total-row">
+                <span>Total Amount:</span>
+                <span id="payment-total">$0.00</span>
+            </div>
+        </div>
+
+        <form id="payment-form">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="John Doe" required>
+
+            <label for="card">Card Number</label>
+            <input type="text" id="card" maxlength="16" placeholder="1234567812345678" required>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="expiry">Expiry (MM/YY)</label>
+                    <input type="text" id="expiry" maxlength="5" placeholder="12/26" required>
+                </div>
+                <div class="input-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" maxlength="3" placeholder="123" required>
+                </div>
+            </div>
+
+            <button type="submit" id="pay-button">Pay Now</button>
+        </form>
+
+        <p id="message"></p>
+    </main>
+
+    <script src="../js/payment.js"></script>
+</body>
+</html>

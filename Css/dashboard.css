@@ -1,0 +1,372 @@
+/* reset*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* navbar */
+.navbar {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #f17b28;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+}
+
+.navbar li {
+    margin-left: 25px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #ff9800;
+}
+
+.search-box {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    width: 250px;
+}
+
+/* div */
+.divider {
+    height: 10px;
+    background-color: #ddd;
+    margin-top: 40px;
+}
+
+/* hero */
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin: 20px;
+    border-radius: 12px;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-badge {
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 0.85em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.1em;
+    margin-bottom: 25px;
+}
+
+.hero-image {
+    width: 300px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* buttons! */
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* welcome */
+.welcome-section {
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+}
+
+.welcome-card {
+    background: white;
+    padding: 30px;
+    flex: 1;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-card h3 {
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.welcome-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* welcome logo! */
+.welcome-logo {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #f17b28 0%, #ff9800 100%);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.logo-icon {
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.logo-icon::before {
+    content: '🍜';
+    font-size: 40px;
+}
+
+.logo-text {
+    color: white;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.logo-tagline {
+    color: white;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+/* featured*/
+.featured-post {
+    background: white;
+    padding: 30px;
+    flex: 1;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-badge {
+    background-color: #f17b28;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 0.85em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.post-image {
+    width: 100%;
+    height: 200px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.rating-score {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #f17b28;
+}
+
+.stars {
+    color: #ffa500;
+}
+
+.featured-post h4 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.reviews {
+    margin-bottom: 15px;
+}
+
+.review-item {
+    color: #666;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.read-more {
+    color: #f17b28;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* mobile hero */
+.mobile-hero {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    padding: 40px;
+    margin: 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.mobile-content h3 {
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.mobile-content p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.mobile-mockups {
+    display: flex;
+    gap: 15px;
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.mobile-mockups img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.mockup {
+    width: 120px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.85em;
+}
+
+/* footer */
+.site-footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 20px;
+    margin-top: 40px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-links {
+    display: flex;
+    gap: 50px;
+}
+
+.footer-column a {
+    color: #aaa;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.footer-column a:hover {
+    color: #ff9800;
+}
+
+.footer-column a:first-child {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    color: #aaa;
+    font-size: 0.9em;
+}

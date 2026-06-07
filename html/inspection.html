@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspection | HawkerSG</title>
+
+    <link rel="stylesheet" href="../Css/dashboard.css">
+    <link rel="stylesheet" href="../Css/inspection.css">
+
+    <script src="../js/inspection.js" defer></script>
+</head>
+<body>
+
+<!-- Navbar - Matching cart.html style -->
+<nav class="navbar">
+    <div class="logo">HawkerSG</div>
+    <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="stalls.html">Stalls</a></li>
+        <li><a href="cart.html">Shopping Cart</a></li>
+        <li><a href="inspection.html">Inspection</a></li>
+        <li><a href="review.html">Feedback</a></li>
+    </ul>
+</nav>
+
+<div class="divider"></div>
+<!-- STALL INFORAMTIONS -->
+<section class="inspection-section">
+    <h2>Stall Inspection</h2>
+
+    <div class="stall-info">
+        <h3>Stall Information</h3>
+
+        <p><strong>Stall Name:</strong> <span id="stallName"></span></p>
+        <p><strong>Owner:</strong> <span id="ownerName"></span></p>
+        <p><strong>Cuisine:</strong> <span id="cuisine"></span></p>
+    </div>
+<!-- CHECKLIST -->
+    <div class="inspection-card">
+        <h3>Inspection Checklist</h3>
+        <div id="checklist"></div>
+
+        <div id="gradeOutput"></div>
+    </div>
+<!-- CHANGING PAGES -->
+    <div class="stall-nav">
+        <button id="prevStall">Previous</button>
+        <button id="nextStall">Next</button>
+    </div>
+</section>
+<!-- PAGE FOOTER -->
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="social-icons">
+            <p>Follow us on social media</p>
+            <p>© 2026 HawkerSG. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
