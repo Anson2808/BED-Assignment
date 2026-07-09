@@ -14,36 +14,84 @@
         <label>Rating:</label>
         <div class="stars" id="selectedRating">★★★★★</div>
 
-        <label for="reviewerName">Your Name</label>
-        <input type="text" id="reviewerName" required placeholder="Enter your name">
+        <label for="reviewerSelect">Your Name</label>
+        <select id="reviewerSelect" required>
+            <option value="">Loading customers...</option>
+        </select>
+
+        <label for="stallSelect">Which Stall Are You Reviewing?</label>
+        <select id="stallSelect" required>
+            <option value="">Loading stalls...</option>
+        </select>
 
         <label for="reviewText">Your Review</label>
         <textarea id="reviewText" required></textarea>
-
-        <label for="imageUpload">Upload Image (Optional)</label>
-        <input type="file" id="imageUpload" accept="image/*">
 
         <button type="submit">Submit Review</button>
     </form>
 </main>
 
 <script>
-// This script handles the review form page
+// This script handles the review form page.
+// Reviews are now saved to the database (Feedback table) through the backend API.
+var API_BASE = 'http://localhost:3000/api';
 
-// When the page loads, it shows the selected rating from the main page
+// When the page loads, show the selected rating and load the dropdowns
 window.addEventListener('DOMContentLoaded', function() {
-    // Get the saved rating from browser storage
+    // Get the saved rating from browser storage (chosen on the home page)
     var savedRating = localStorage.getItem('rating');
-    
+
     // If no rating was saved, 5 stars is the default
     if (!savedRating) {
         savedRating = 5;
     }
-    
+
     // Convert the rating text from a string to a number and display the correct stars
     var ratingNumber = parseInt(savedRating);
     showSelectedStars(ratingNumber);
+
+    loadCustomers();
+    loadStalls();
 });
+
+// Fill the "Your Name" dropdown with registered customers from the database
+function loadCustomers() {
+    fetch(API_BASE + '/customers')
+        .then(function(response) { return response.json(); })
+        .then(function(customers) {
+            var select = document.getElementById('reviewerSelect');
+            select.innerHTML = '<option value="">-- Select your name --</option>';
+            for (var i = 0; i < customers.length; i++) {
+                var option = document.createElement('option');
+                option.value = customers[i].CustID;
+                option.textContent = customers[i].CustName;
+                select.appendChild(option);
+            }
+        })
+        .catch(function(error) {
+            console.error('Could not load customers:', error);
+            alert('Could not load customers. Make sure the backend server is running.');
+        });
+}
+
+// Fill the stall dropdown with stalls from the database
+function loadStalls() {
+    fetch(API_BASE + '/stalls')
+        .then(function(response) { return response.json(); })
+        .then(function(stalls) {
+            var select = document.getElementById('stallSelect');
+            select.innerHTML = '<option value="">-- Select a stall --</option>';
+            for (var i = 0; i < stalls.length; i++) {
+                var option = document.createElement('option');
+                option.value = stalls[i].StallID;
+                option.textContent = stalls[i].StallName;
+                select.appendChild(option);
+            }
+        })
+        .catch(function(error) {
+            console.error('Could not load stalls:', error);
+        });
+}
 
 // Function to display the filled and empty stars
 function showSelectedStars(numberOfStars) {
@@ -51,7 +99,7 @@ function showSelectedStars(numberOfStars) {
     var starsArea = document.getElementById('selectedRating');
     // Creates an empty string to store the star symbols.
     var starsHTML = '';
-    
+
     // Create 5 stars, filled or empty based on rating
     for (var i = 1; i <= 5; i++) {
         if (i <= numberOfStars) {
@@ -60,84 +108,65 @@ function showSelectedStars(numberOfStars) {
             starsHTML = starsHTML + '☆';
         }
     }
-    
+
     // Put the stars in the display area which is the page
     starsArea.innerHTML = starsHTML;
 }
 
-// It listens for the form submission and when the form is submitted, save the review
+// When the form is submitted, send the review to the backend
 document.getElementById("reviewForm").addEventListener("submit", function (event) {
     // It prevents the default page refresh behavior
     event.preventDefault();
-    
-    // Get all the saved rating
+
+    // Get the saved rating
     var userRating = localStorage.getItem('rating');
     // If no rating was saved, 5 stars is the default
     if (!userRating) {
         userRating = 5;
     }
-    // Convert the rating text from a string to a number
     var ratingNumber = parseInt(userRating);
-    
-    // Get the user's name, review text, and image file
-    var userName = document.getElementById('reviewerName').value;
-    var userReview = document.getElementById('reviewText').value;
-    var imageFile = document.getElementById('imageUpload');
-    
-    // Check if the user uploaded an image
-    if (imageFile.files && imageFile.files[0]) {
-        // Read the image file
-        var fileReader = new FileReader();
-        // Runs when the image is fully read
-        fileReader.onload = function(event) {
-            var imageData = event.target.result;
-            // Save the review with the image data
-            saveUserReview(userName, ratingNumber, userReview, imageData);
-        };
-        // Reads the image file
-        fileReader.readAsDataURL(imageFile.files[0]);
-    // It saves the review without image if no image is uploaded
-    } else {
-        saveUserReview(userName, ratingNumber, userReview, null);
-    }
-});
 
-// Function to save the review to browser storage
-function saveUserReview(name, rating, reviewText, imageData) {
-    // Get existing reviews from browser storage
-    var existingReviews = localStorage.getItem("reviews");
-    // This creates an empty array to store reviews
-    var reviewList = [];
-    
-    // Converts the existing reviews from string to array if there are any
-    if (existingReviews) {
-        reviewList = JSON.parse(existingReviews);
+    var custId = document.getElementById('reviewerSelect').value;
+    var stallId = document.getElementById('stallSelect').value;
+    var userReview = document.getElementById('reviewText').value;
+
+    if (!custId || !stallId) {
+        alert('Please select your name and a stall.');
+        return;
     }
-    
-    // Create the new review object
-    var newReview = {
-        name: name,
-        rating: rating,
-        text: reviewText,
-        image: imageData,
-        date: new Date().toLocaleDateString()
-    };
-    
-    // Add the new review to the list
-    reviewList.push(newReview);
-    
-    // Save the updated list back to the browser storage
-    localStorage.setItem("reviews", JSON.stringify(reviewList));
-    
-    // Show the success message
-    alert("Review submitted successfully!");
-    
-    // Remove the rating since we already used it
-    localStorage.removeItem('rating');
-    
-    // Brings us back to the main page
-    window.location.href = "index.html";
-}
+
+    // Send the review to the backend API, which saves it in the database
+    fetch(API_BASE + '/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            custId: parseInt(custId),
+            stallId: parseInt(stallId),
+            rating: ratingNumber,
+            comment: userReview
+        })
+    })
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Server returned ' + response.status);
+            }
+            return response.json();
+        })
+        .then(function() {
+            // Show the success message
+            alert("Review submitted successfully!");
+
+            // Remove the rating since we already used it
+            localStorage.removeItem('rating');
+
+            // Brings us back to the main page
+            window.location.href = "index.html";
+        })
+        .catch(function(error) {
+            console.error('Failed to submit review:', error);
+            alert('Could not submit your review. Make sure the backend server is running.');
+        });
+});
 </script>
 
 </body>

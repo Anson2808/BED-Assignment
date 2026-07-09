@@ -20,6 +20,7 @@
         <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="stalls.html" class="active">Stalls</a></li>
         <li><a href="cart.html">Shopping Cart</a></li>
+        <li><a href="order-history.html">Order History</a></li>
         <li><a href="inspection.html">Inspection</a></li>
         <li><a href="review.html">Feedback</a></li>
     </ul>
@@ -32,7 +33,7 @@
 
 <section class="stores">
     <div class="stores-content">
-        <h1>YouFu Fried Hokkien Mee</h1>
+        <h1 id="stallTitle">Loading stall...</h1>
         <button id="scroll-to-menu">View Menu</button>
     </div>
     <div class="stores-image-placeholder">
@@ -40,65 +41,23 @@
     </div>
 </section>
 
-<main class="discovery-section">
-    <div class="featured-post">
-        <div class="post-badge">Top Rated Food #1</div>
-        <h3>Signature Hokkien Mee, $5.50</h3>
-        <div class="btn-group">
-            <button class="btn-know">Know More</button>
-            <button class="btn-cart" data-item="Signature Hokkien Mee" data-price="5.50">Add To Cart</button>
-        </div>
-        <img src="https://admin.misstamchiak.com/wp-content/uploads/2016/12/16069838051_c75eb4dd99_o-e1481721167937.jpg">
-    </div>
-
-    <div class="featured-post">
-        <div class="post-badge">Top Rated Food #2</div>
-        <h3>Prawn Noodle, $4.50</h3>
-        <div class="btn-group">
-            <button class="btn-know">Know More</button>
-            <button class="btn-cart" data-item="Prawn Noodle" data-price="4.50">Add To Cart</button>
-        </div>
-        <img src="https://eatbook.sg/wp-content/uploads/2017/01/Jalan-Sultan-Prawn-Mee-1.jpg">
-    </div>
-</main>
+<!-- Featured dishes are filled in from the database by stalls.js -->
+<main class="discovery-section" id="featuredSection"></main>
 
 <div id="full-menu" class="menu-container">
     <h2 class="menu-title">Full Stall Menu</h2>
-    
+
     <table class="menu-table">
         <thead>
             <tr>
                 <th>Dish Name</th>
+                <th>Category</th>
                 <th>Price</th>
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>Black Carrot Cake (Small)</td>
-                <td>$4.00</td>
-                <td><button class="btn-cart" data-item="Small Carrot Cake" data-price="4.00">Add</button></td>
-            </tr>
-            <tr>
-                <td>Black Carrot Cake (Large)</td>
-                <td>$6.00</td>
-                <td><button class="btn-cart" data-item="Large Carrot Cake" data-price="6.00">Add</button></td>
-            </tr>
-            <tr>
-                <td>Signature Prawn Mee</td>
-                <td>$5.50</td>
-                <td><button class="btn-cart" data-item="Prawn Mee" data-price="5.50">Add</button></td>
-            </tr>
-            <tr>
-                <td>Oyster Omelette</td>
-                <td>$8.00</td>
-                <td><button class="btn-cart" data-item="Oyster Omelette" data-price="8.00">Add</button></td>
-            </tr>
-            <tr>
-                <td>Fried Kway Teow</td>
-                <td>$4.50</td>
-                <td><button class="btn-cart" data-item="Fried Kway Teow" data-price="4.50">Add</button></td>
-            </tr>
+        <tbody id="menuTableBody">
+            <tr><td colspan="4">Loading menu...</td></tr>
         </tbody>
     </table>
 </div>

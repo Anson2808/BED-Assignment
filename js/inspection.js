@@ -1,77 +1,58 @@
+// Inspections now come from the backend database (Inspection table)
+var API_BASE = 'http://localhost:3000/api';
+
 document.addEventListener('DOMContentLoaded', function () {
 
-    const stalls = [
-        {
-            name: 'Kofu',
-            owner: 'Gao Jia Rong',
-            cuisine: 'Chinese',
-            checklist: {
-                Cleanliness: true,
-                'Food Handling': true,
-                'Food Storage': false,
-                'Hygiene Practices': true
-            }
-        },
-        {
-            name: 'Spice Route',
-            owner: 'Ravi Kumar',
-            cuisine: 'Indian',
-            checklist: {
-                Cleanliness: true,
-                'Food Handling': true,
-                'Food Storage': true,
-                'Hygiene Practices': true
-            }
-        },
-        {
-            name: 'Nasi Power',
-            owner: 'Siti Aminah',
-            cuisine: 'Malay',
-            checklist: {
-                Cleanliness: true,
-                'Food Handling': false,
-                'Food Storage': false,
-                'Hygiene Practices': true
-            }
-        }
-    ];
-
+    let inspections = [];
     let index = 0;
 
     const stallName = document.getElementById('stallName');
-    const ownerName = document.getElementById('ownerName');
-    const cuisine = document.getElementById('cuisine');
-    const checklistDiv = document.getElementById('checklist');
+    const hawkerCentre = document.getElementById('hawkerCentre');
+    const operatorName = document.getElementById('operatorName');
+    const detailsDiv = document.getElementById('inspectionDetails');
     const gradeOutput = document.getElementById('gradeOutput');
 
-    function renderStall(i) {
-        const stall = stalls[i];
+    // Fetch all inspection records from the backend
+    fetch(API_BASE + '/inspections')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Server returned ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            inspections = data;
 
-        stallName.textContent = stall.name;
-        ownerName.textContent = stall.owner;
-        cuisine.textContent = stall.cuisine;
+            if (inspections.length === 0) {
+                stallName.textContent = 'No inspections recorded yet.';
+                return;
+            }
 
-        checklistDiv.innerHTML = '';
+            renderInspection(index);
+        })
+        .catch(error => {
+            console.error('Failed to load inspections:', error);
+            stallName.textContent = 'Could not load inspections.';
+            detailsDiv.innerHTML = '<p>Make sure the backend server is running (npm run dev in hawker-backend).</p>';
+        });
 
-        let passed = 0;
-        const total = Object.keys(stall.checklist).length;
+    function renderInspection(i) {
+        const inspection = inspections[i];
 
-        for (let item in stall.checklist) {
-            const checked = stall.checklist[item];
-            if (checked) passed++;
+        stallName.textContent = inspection.StallName;
+        hawkerCentre.textContent = inspection.HCName;
+        operatorName.textContent = inspection.OperatorName;
 
-            checklistDiv.innerHTML += `
-                <div class="check-item">
-                    <input type="checkbox" ${checked ? 'checked' : ''} disabled>
-                    <label>${item}</label>
-                </div>
-            `;
-        }
+        const inspectionDate = new Date(inspection.InspectionDate).toLocaleDateString();
 
-        let grade = 'D';
-        if (passed === total) grade = 'A';
-        else if (passed === total - 1) grade = 'B';
-        else if (passed >= 2) grade = 'C';
+        detailsDiv.innerHTML = `
+            <p><strong>Inspection Date:</strong> ${inspectionDate}</p>
+            <p><strong>NEA Officer:</strong> ${inspection.OfficerName}</p>
+            <p><strong>Remarks:</strong> ${inspection.InspectionRemark || 'No remarks'}</p>
+            <p><strong>Record:</strong> ${i + 1} of ${inspections.length}</p>
+        `;
+
+        const grade = inspection.HygieneGrade;
 
         gradeOutput.textContent = `Hygiene Grade: ${grade}`;
         gradeOutput.style.color =
@@ -82,14 +63,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     document.getElementById('nextStall').addEventListener('click', () => {
-        index = (index + 1) % stalls.length;
-        renderStall(index);
+        if (inspections.length === 0) return;
+        index = (index + 1) % inspections.length;
+        renderInspection(index);
     });
 
     document.getElementById('prevStall').addEventListener('click', () => {
-        index = (index - 1 + stalls.length) % stalls.length;
-        renderStall(index);
+        if (inspections.length === 0) return;
+        index = (index - 1 + inspections.length) % inspections.length;
+        renderInspection(index);
     });
-
-    renderStall(index);
 });
